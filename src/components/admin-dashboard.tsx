@@ -11,6 +11,17 @@ export function AdminDashboard({ initialData }: { initialData: PortfolioData }) 
   const [isSaving, setIsSaving] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [password, setPassword] = useState("");
+  const [isAuthorized, setIsAuthorized] = useState(false);
+
+  async function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
+    if (password === "admin123") {
+      setIsAuthorized(true);
+    } else {
+      alert("INCORRECT PASSWORD.");
+      setPassword("");
+    }
+  }
 
   async function handleSave() {
     if (!password) {
@@ -50,6 +61,36 @@ export function AdminDashboard({ initialData }: { initialData: PortfolioData }) 
     }
   }
 
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black font-mono p-4">
+        <form onSubmit={handleLogin} className="sci-fi-card p-12 flex flex-col items-center gap-8 max-w-md w-full relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1 bg-[color:var(--magenta)]"></div>
+          <ShieldAlert className="text-[color:var(--magenta)] w-20 h-20 animate-pulse" />
+          <div className="text-center">
+            <h1 className="text-3xl font-black text-white uppercase tracking-widest mb-2">Restricted Area</h1>
+            <p className="text-[color:var(--muted-foreground)] text-sm tracking-widest">ENTER SYSTEM OVERRIDE CODE</p>
+          </div>
+          <input 
+            type="password" 
+            placeholder="Password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full bg-black/50 border-2 border-[color:var(--magenta)] px-6 py-4 text-center text-xl text-white tracking-[0.5em] focus:outline-none focus:border-white transition-colors"
+            autoFocus
+          />
+          <button 
+            type="submit"
+            className="w-full py-4 bg-[color:var(--magenta)] text-black font-black uppercase tracking-widest hover:bg-white transition-colors"
+            style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}
+          >
+            Authenticate
+          </button>
+        </form>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-6xl mx-auto p-8 pt-24 font-mono pb-32">
       <div className="flex items-center justify-between mb-12 border-b-2 border-[color:var(--accent)] pb-6">
@@ -62,13 +103,6 @@ export function AdminDashboard({ initialData }: { initialData: PortfolioData }) 
         </div>
         
         <div className="flex flex-col items-end gap-2">
-          <input 
-            type="password" 
-            placeholder="Enter Admin Password" 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="bg-black border-2 border-[color:var(--accent)] px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-white"
-          />
           <button 
             onClick={handleSave}
             disabled={isSaving}

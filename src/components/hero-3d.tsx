@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls, Sphere, MeshDistortMaterial, Stars, Torus, Icosahedron, Box, Wireframe } from "@react-three/drei";
+import { OrbitControls, Sphere, MeshDistortMaterial, Stars, Torus, Icosahedron, Box, Wireframe, Float, PresentationControls } from "@react-three/drei";
 import * as THREE from "three";
 import { useThemeContext } from "./theme-provider";
 
@@ -43,9 +43,11 @@ function AnimatedSphere() {
     }
   });
   return (
-    <Sphere args={[1.5, 64, 64]} ref={meshRef}>
-      <MeshDistortMaterial color="var(--primary)" attach="material" distort={0.4} speed={2} roughness={0.2} metalness={0.8} wireframe={true} />
-    </Sphere>
+    <Float speed={2} rotationIntensity={1} floatIntensity={2}>
+      <Sphere args={[1.5, 64, 64]} ref={meshRef}>
+        <MeshDistortMaterial color="var(--primary)" attach="material" distort={0.4} speed={2} roughness={0.2} metalness={0.8} wireframe={true} />
+      </Sphere>
+    </Float>
   );
 }
 
@@ -60,17 +62,19 @@ function IronManReactor() {
     outerRef.current.rotation.y = state.clock.getElapsedTime() * 0.2 + scrollY;
   });
   return (
-    <group>
-      <Torus args={[1.5, 0.1, 16, 100]} ref={outerRef}>
-        <meshStandardMaterial color="var(--primary)" emissive="var(--primary)" emissiveIntensity={2} wireframe />
-      </Torus>
-      <Torus args={[1.2, 0.2, 16, 50]} ref={innerRef}>
-        <meshStandardMaterial color="var(--accent)" emissive="var(--accent)" emissiveIntensity={1.5} />
-      </Torus>
-      <Sphere args={[0.8, 32, 32]}>
-        <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={3} />
-      </Sphere>
-    </group>
+    <Float speed={1.5} rotationIntensity={1.5} floatIntensity={2}>
+      <group>
+        <Torus args={[1.5, 0.1, 16, 100]} ref={outerRef}>
+          <meshStandardMaterial color="var(--primary)" emissive="var(--primary)" emissiveIntensity={2} wireframe />
+        </Torus>
+        <Torus args={[1.2, 0.2, 16, 50]} ref={innerRef}>
+          <meshStandardMaterial color="var(--accent)" emissive="var(--accent)" emissiveIntensity={1.5} />
+        </Torus>
+        <Sphere args={[0.8, 32, 32]}>
+          <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={3} />
+        </Sphere>
+      </group>
+    </Float>
   );
 }
 
@@ -83,9 +87,11 @@ function BatmanShape() {
     ref.current.rotation.x = Math.sin(state.clock.getElapsedTime()) * 0.2 + scrollY;
   });
   return (
-    <Icosahedron args={[2, 0]} ref={ref}>
-      <meshStandardMaterial color="#111111" metalness={0.9} roughness={0.1} />
-    </Icosahedron>
+    <Float speed={2} rotationIntensity={2} floatIntensity={1.5}>
+      <Icosahedron args={[2, 0]} ref={ref}>
+        <meshStandardMaterial color="#111111" metalness={0.9} roughness={0.1} />
+      </Icosahedron>
+    </Float>
   );
 }
 
@@ -98,9 +104,11 @@ function CyberpunkCube() {
     ref.current.rotation.y = state.clock.getElapsedTime() * 0.6 + scrollY;
   });
   return (
-    <Box args={[2, 2, 2]} ref={ref}>
-      <meshStandardMaterial color="var(--background)" emissive="var(--accent)" emissiveIntensity={0.5} wireframe />
-    </Box>
+    <Float speed={1.5} rotationIntensity={2} floatIntensity={2}>
+      <Box args={[2, 2, 2]} ref={ref}>
+        <meshStandardMaterial color="var(--background)" emissive="var(--accent)" emissiveIntensity={0.5} wireframe />
+      </Box>
+    </Float>
   );
 }
 
@@ -184,11 +192,20 @@ export function Hero3D() {
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
         
-        {themeName === "Iron Man" && <IronManReactor />}
-        {themeName === "Batman" && <BatmanShape />}
-        {themeName === "Cyberpunk" && <CyberpunkCube />}
-        {themeName === "Matrix" && <MatrixRain />}
-        {themeName === "Space" && <AnimatedSphere />}
+        <PresentationControls 
+          global 
+          config={{ mass: 2, tension: 500 }} 
+          snap={{ mass: 4, tension: 1500 }} 
+          rotation={[0, 0, 0]} 
+          polar={[-Math.PI / 3, Math.PI / 3]} 
+          azimuth={[-Math.PI / 1.4, Math.PI / 2]}
+        >
+          {themeName === "Iron Man" && <IronManReactor />}
+          {themeName === "Batman" && <BatmanShape />}
+          {themeName === "Cyberpunk" && <CyberpunkCube />}
+          {themeName === "Matrix" && <MatrixRain />}
+          {themeName === "Space" && <AnimatedSphere />}
+        </PresentationControls>
         
         {themeName !== "Matrix" && <Particles />}
         {themeName !== "Matrix" && <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade speed={1} />}

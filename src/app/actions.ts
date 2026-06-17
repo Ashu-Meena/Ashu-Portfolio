@@ -102,3 +102,25 @@ export async function deleteBlogPost(id: string, password?: string) {
     return { success: false, error: error.message };
   }
 }
+
+export async function addGuestbookEntry(name: string, message: string) {
+  try {
+    if (!name || !message) throw new Error("Name and message are required.");
+    
+    // Generate a random avatar from dicebear
+    const avatar = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`;
+    
+    const { error } = await supabaseAdmin.from('guestbook').insert({
+      user_name: name,
+      user_avatar: avatar,
+      message: message
+    });
+    if (error) throw error;
+    
+    revalidatePath("/guestbook");
+    return { success: true };
+  } catch (error: any) {
+    console.error("Failed to add guestbook entry:", error);
+    return { success: false, error: error.message };
+  }
+}

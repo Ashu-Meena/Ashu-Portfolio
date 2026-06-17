@@ -2,8 +2,13 @@
 
 import { getPortfolioData, savePortfolioData, PortfolioData } from "@/lib/data";
 import { revalidatePath } from "next/cache";
+import { supabaseAdmin } from "@/lib/supabase";
 
-export async function updatePortfolioData(newData: PortfolioData) {
+export async function updatePortfolioData(newData: PortfolioData, password?: string) {
+  if (password !== "admin123") {
+    return { success: false, error: "Unauthorized. Incorrect password." };
+  }
+
   try {
     await savePortfolioData(newData);
     // Revalidate the home page so it immediately shows the new data
@@ -16,7 +21,11 @@ export async function updatePortfolioData(newData: PortfolioData) {
   }
 }
 
-export async function uploadResume(formData: FormData) {
+export async function uploadResume(formData: FormData, password?: string) {
+  if (password !== "admin123") {
+    return { success: false, error: "Unauthorized. Incorrect password." };
+  }
+
   try {
     const file = formData.get("file") as File;
     if (!file) return { success: false, error: "No file provided" };
@@ -24,18 +33,22 @@ export async function uploadResume(formData: FormData) {
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     
-    const fs = require("fs");
-    const path = require("path");
-    const publicPath = path.join(process.cwd(), "public");
-    
-    // Ensure public dir exists
-    if (!fs.existsSync(publicPath)) {
-      fs.mkdirSync(publicPath, { recursive: true });
+    // Upload to Supabase Storage using Admin Client
+    const { error } = await supabaseAdmin.storage
+      .from('portfolio_assets')
+      .upload('resume.pdf', buffer, {
+        contentType: 'application/pdf',
+        upsert: true
+      });
+
+    if (error) {
+      console.error("Supabase upload error:", error);
+      throw error;
     }
     
-    fs.writeFileSync(path.join(publicPath, "resume.pdf"), buffer);
     return { success: true };
   } catch (err: any) {
+    console.error(err);
     return { success: false, error: err.message };
   }
 }

@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { supabase, supabaseAdmin } from './supabase';
 
 export interface PortfolioData {
   stats: {
@@ -66,6 +67,14 @@ const dataFilePath = path.join(process.cwd(), 'src', 'data', 'portfolio.json');
 
 export async function getPortfolioData(): Promise<PortfolioData> {
   try {
+    // 1. Try to fetch from Supabase Storage first
+    const { data, error } = await supabase.storage.from('portfolio_assets').download('portfolio.json');
+    if (data) {
+      const text = await data.text();
+      return JSON.parse(text);
+    }
+    
+    // 2. Fallback to local file if Supabase fails (e.g. first run)
     const fileContents = await fs.readFile(dataFilePath, 'utf8');
     return JSON.parse(fileContents);
   } catch (error) {
@@ -76,7 +85,28 @@ export async function getPortfolioData(): Promise<PortfolioData> {
 
 export async function savePortfolioData(data: PortfolioData): Promise<void> {
   try {
-    await fs.writeFile(dataFilePath, JSON.stringify(data, null, 2), 'utf8');
+    const jsonString = JSON.stringify(data, null, 2);
+    
+    // Upload to Supabase Storage using Admin Client to bypass RLS
+    const { error } = await supabaseAdmin.storage
+      .from('portfolio_assets')
+      .upload('portfolio.json', jsonString, {
+        contentType: 'application/json',
+        upsert: true
+      });
+      
+    if (error) {
+      console.error("Supabase storage error:", error);
+      throw error;
+    }
+    
+    // Also try to update local file for local dev sync, ignore errors on Vercel
+    try {
+      await fs.writeFile(dataFilePath, jsonString, 'utf8');
+    } catch (fsError) {
+      // Ignore FS errors in production
+    }
+    
   } catch (error) {
     console.error("Error saving portfolio data:", error);
     throw new Error("Failed to save portfolio data");

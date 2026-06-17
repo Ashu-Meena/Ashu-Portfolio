@@ -194,7 +194,7 @@ export function ContactSection() {
               <GithubIcon className="w-5 h-5" />
             </MagneticButton>
           <a 
-            href="/resume.pdf"
+            href={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/portfolio_assets/resume.pdf`}
             download="Ashu_Meena_Resume.pdf"
             className="flex items-center gap-2 bg-[color:var(--secondary)] hover:bg-[color:var(--accent)] hover:text-black border border-[color:var(--border)] px-6 py-3 font-bold uppercase tracking-widest transition-colors ml-auto"
             style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}

@@ -10,19 +10,29 @@ export function AdminDashboard({ initialData }: { initialData: PortfolioData }) 
   const [activeTab, setActiveTab] = useState<"profile" | "theme" | "stats" | "projects" | "skills" | "journey" | "experience" | "certs">("profile");
   const [isSaving, setIsSaving] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [password, setPassword] = useState("");
 
   async function handleSave() {
+    if (!password) {
+      alert("Please enter the admin password first.");
+      return;
+    }
     setIsSaving(true);
-    const res = await updatePortfolioData(data);
+    const res = await updatePortfolioData(data, password);
     setIsSaving(false);
     if (res.success) {
       alert("System updated successfully. Changes are now live.");
     } else {
-      alert("Error updating system.");
+      alert(res.error || "Error updating system.");
     }
   }
 
   async function handleResumeUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!password) {
+      alert("Please enter the admin password first.");
+      e.target.value = "";
+      return;
+    }
     const file = e.target.files?.[0];
     if (!file) return;
     
@@ -30,7 +40,7 @@ export function AdminDashboard({ initialData }: { initialData: PortfolioData }) 
     const formData = new FormData();
     formData.append("file", file);
     
-    const res = await uploadResume(formData);
+    const res = await uploadResume(formData, password);
     setIsUploading(false);
     
     if (res.success) {
@@ -50,15 +60,25 @@ export function AdminDashboard({ initialData }: { initialData: PortfolioData }) 
           </h1>
           <p className="text-[color:var(--accent)] mt-2">&gt; AUTHENTICATED AS: SYSTEM_ADMIN</p>
         </div>
-        <button 
-          onClick={handleSave}
-          disabled={isSaving}
-          className="flex items-center gap-2 px-6 py-3 bg-[color:var(--accent)] text-black font-bold uppercase hover:bg-white transition-colors"
-          style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}
-        >
-          <Save className="w-5 h-5" />
-          {isSaving ? "Saving..." : "Commit Changes"}
-        </button>
+        
+        <div className="flex flex-col items-end gap-2">
+          <input 
+            type="password" 
+            placeholder="Enter Admin Password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="bg-black border-2 border-[color:var(--accent)] px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-white"
+          />
+          <button 
+            onClick={handleSave}
+            disabled={isSaving}
+            className="flex items-center gap-2 px-6 py-3 bg-[color:var(--accent)] text-black font-bold uppercase hover:bg-white transition-colors"
+            style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}
+          >
+            <Save className="w-5 h-5" />
+            {isSaving ? "Saving..." : "Commit Changes"}
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-4 mb-8">

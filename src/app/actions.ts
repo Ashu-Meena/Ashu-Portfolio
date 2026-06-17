@@ -52,3 +52,53 @@ export async function uploadResume(formData: FormData, password?: string) {
     return { success: false, error: err.message };
   }
 }
+
+export async function createOrUpdateBlogPost(post: { id?: string, title: string, slug: string, content: string, published: boolean }, password?: string) {
+  if (password !== "20112004") {
+    return { success: false, error: "Unauthorized. Incorrect password." };
+  }
+
+  try {
+    if (post.id) {
+      const { error } = await supabaseAdmin.from('blog_posts').update({
+        title: post.title,
+        slug: post.slug,
+        content: post.content,
+        published: post.published
+      }).eq('id', post.id);
+      if (error) throw error;
+    } else {
+      const { error } = await supabaseAdmin.from('blog_posts').insert({
+        title: post.title,
+        slug: post.slug,
+        content: post.content,
+        published: post.published
+      });
+      if (error) throw error;
+    }
+    
+    revalidatePath("/blog");
+    revalidatePath(`/blog/${post.slug}`);
+    return { success: true };
+  } catch (error: any) {
+    console.error("Failed to save blog post:", error);
+    return { success: false, error: error.message };
+  }
+}
+
+export async function deleteBlogPost(id: string, password?: string) {
+  if (password !== "20112004") {
+    return { success: false, error: "Unauthorized. Incorrect password." };
+  }
+
+  try {
+    const { error } = await supabaseAdmin.from('blog_posts').delete().eq('id', id);
+    if (error) throw error;
+    
+    revalidatePath("/blog");
+    return { success: true };
+  } catch (error: any) {
+    console.error("Failed to delete blog post:", error);
+    return { success: false, error: error.message };
+  }
+}

@@ -2,12 +2,13 @@
 
 import React, { useState } from "react";
 import { PortfolioData } from "@/lib/data";
-import { updatePortfolioData, uploadResume } from "@/app/actions";
-import { Save, Plus, Trash2, ShieldAlert, Upload } from "lucide-react";
+import { updatePortfolioData, uploadResume, createOrUpdateBlogPost, deleteBlogPost } from "@/app/actions";
+import { Save, Plus, Trash2, ShieldAlert, Upload, PenTool } from "lucide-react";
 
-export function AdminDashboard({ initialData }: { initialData: PortfolioData }) {
+export function AdminDashboard({ initialData, initialBlogs }: { initialData: PortfolioData, initialBlogs: any[] }) {
   const [data, setData] = useState<PortfolioData>(initialData);
-  const [activeTab, setActiveTab] = useState<"profile" | "theme" | "stats" | "projects" | "skills" | "journey" | "experience" | "certs">("profile");
+  const [blogs, setBlogs] = useState<any[]>(initialBlogs);
+  const [activeTab, setActiveTab] = useState<"profile" | "theme" | "stats" | "projects" | "skills" | "journey" | "experience" | "certs" | "blog">("profile");
   const [isSaving, setIsSaving] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [password, setPassword] = useState("");
@@ -116,7 +117,7 @@ export function AdminDashboard({ initialData }: { initialData: PortfolioData }) 
       </div>
 
       <div className="flex flex-wrap gap-4 mb-8">
-        {(["profile", "theme", "stats", "projects", "skills", "journey", "experience", "certs"] as const).map(tab => (
+        {(["profile", "theme", "stats", "projects", "skills", "journey", "experience", "certs", "blog"] as const).map(tab => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
@@ -513,6 +514,98 @@ export function AdminDashboard({ initialData }: { initialData: PortfolioData }) 
                       newC[idx].date = e.target.value;
                       setData({ ...data, certs: newC });
                     }} className="bg-black border border-[color:var(--border)] p-2 text-sm text-white" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {activeTab === "blog" && (
+          <div className="flex flex-col gap-8">
+            <div className="flex items-center justify-between border-b border-[color:var(--border)] pb-2">
+              <h2 className="text-2xl font-bold text-[color:var(--accent)] uppercase flex items-center gap-2">
+                <PenTool className="w-6 h-6" /> Developer Blog
+              </h2>
+              <button 
+                onClick={() => setBlogs([{ id: "", title: "New Blog Post", slug: `new-post-${Date.now()}`, content: "# New Post\nWrite markdown here...", published: false }, ...blogs])}
+                className="flex items-center gap-1 text-[color:var(--accent)] hover:text-white"
+              >
+                <Plus className="w-4 h-4" /> Add Post
+              </button>
+            </div>
+            {blogs.map((blog, idx) => (
+              <div key={blog.id || idx} className="border border-[color:var(--border)] p-6 relative group bg-[color:var(--secondary)]/30">
+                <div className="absolute top-4 right-4 flex gap-4">
+                  <button 
+                    onClick={async () => {
+                      if (!password) return alert("Enter password first.");
+                      const res = await createOrUpdateBlogPost(blog, password);
+                      if (res.success) alert("Blog post saved!");
+                      else alert(res.error);
+                    }}
+                    className="text-[color:var(--accent)] font-bold uppercase text-sm hover:text-white"
+                  >
+                    Save Post
+                  </button>
+                  <button 
+                    onClick={async () => {
+                      if (!blog.id) {
+                        const newB = [...blogs];
+                        newB.splice(idx, 1);
+                        setBlogs(newB);
+                        return;
+                      }
+                      if (!password) return alert("Enter password first.");
+                      if (confirm("Are you sure you want to delete this post?")) {
+                        const res = await deleteBlogPost(blog.id, password);
+                        if (res.success) {
+                          const newB = [...blogs];
+                          newB.splice(idx, 1);
+                          setBlogs(newB);
+                        } else alert(res.error);
+                      }
+                    }}
+                    className="text-[color:var(--muted-foreground)] hover:text-red-500"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                  </button>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 pr-32">
+                  <div className="flex flex-col gap-1">
+                    <label className="text-xs uppercase text-[color:var(--muted-foreground)]">Title</label>
+                    <input type="text" value={blog.title} onChange={e => {
+                      const newB = [...blogs];
+                      newB[idx].title = e.target.value;
+                      // Auto slugify if it's a new post
+                      if (!blog.id) newB[idx].slug = e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                      setBlogs(newB);
+                    }} className="bg-black border border-[color:var(--border)] p-2 text-sm text-white" />
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <label className="text-xs uppercase text-[color:var(--muted-foreground)]">Slug (URL)</label>
+                    <input type="text" value={blog.slug} onChange={e => {
+                      const newB = [...blogs];
+                      newB[idx].slug = e.target.value;
+                      setBlogs(newB);
+                    }} className="bg-black border border-[color:var(--border)] p-2 text-sm text-white" />
+                  </div>
+                  <div className="flex flex-col gap-1 col-span-full">
+                    <label className="text-xs uppercase text-[color:var(--muted-foreground)]">Content (Markdown)</label>
+                    <textarea value={blog.content} onChange={e => {
+                      const newB = [...blogs];
+                      newB[idx].content = e.target.value;
+                      setBlogs(newB);
+                    }} className="bg-black border border-[color:var(--border)] p-2 text-sm text-white font-mono h-48" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <input type="checkbox" checked={blog.published} onChange={e => {
+                      const newB = [...blogs];
+                      newB[idx].published = e.target.checked;
+                      setBlogs(newB);
+                    }} className="w-4 h-4" />
+                    <label className="text-sm uppercase text-white font-bold">Published</label>
                   </div>
                 </div>
               </div>

@@ -1,9 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { Moon, Sun, Briefcase, Code2 } from "lucide-react";
+import { Moon, Sun, Briefcase, Code2, MessageSquare, PenTool } from "lucide-react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export function Navbar() {
   const { setTheme, theme } = useTheme();
@@ -34,6 +35,22 @@ export function Navbar() {
         <div className="h-4 w-px bg-[color:var(--border)]" />
 
         <div className="flex items-center gap-2">
+          <Link 
+            href="/guestbook"
+            className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 bg-[color:var(--secondary)] text-[color:var(--accent)] hover:bg-[color:var(--accent)] hover:text-black border border-[color:var(--accent)]/50"
+          >
+            <MessageSquare className="w-3.5 h-3.5" /> Guestbook
+          </Link>
+          
+          <Link 
+            href="/blog"
+            className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 bg-transparent hover:bg-[color:var(--secondary)] text-[color:var(--muted-foreground)] hover:text-[color:var(--foreground)] border border-transparent"
+          >
+            <PenTool className="w-3.5 h-3.5" /> Blog
+          </Link>
+
+          <div className="h-4 w-px bg-[color:var(--border)] mx-1 hidden md:block" />
+
           <button
             onClick={toggleRecruiterMode}
             className={cn(

@@ -159,7 +159,7 @@ export default function HomeClient({ initialData }: { initialData: PortfolioData
 
             <div className="flex flex-col sm:flex-row items-center gap-4 animate-fade-in-up mb-12" style={{ animationDelay: '0.8s' }}>
                 <MagneticButton>
-                  <a href="#projects" className="group relative px-8 py-4 bg-[color:var(--foreground)] text-[color:var(--background)] font-bold text-sm uppercase tracking-widest overflow-hidden">
+                  <a href="#projects" className="group relative px-8 py-4 block flex items-center justify-center bg-[color:var(--foreground)] text-[color:var(--background)] font-bold text-sm uppercase tracking-widest overflow-hidden">
                     <span className="relative z-10 flex items-center gap-2">
                       View Projects <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>

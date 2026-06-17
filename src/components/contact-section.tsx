@@ -190,7 +190,7 @@ export function ContactSection() {
             <MagneticButton href="https://linkedin.com/in/ashu-meena2420" className="p-3.5 rounded-full border-2 border-[color:var(--border)] bg-[color:var(--background)] hover:bg-[#0A66C2] hover:text-white hover:border-transparent transition-all shadow-sm">
               <LinkedinIcon className="w-5 h-5" />
             </MagneticButton>
-            <MagneticButton href="https://github.com/ashu-meena2420" className="p-3.5 rounded-full border-2 border-[color:var(--border)] bg-[color:var(--background)] hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)] hover:border-transparent transition-all shadow-sm">
+            <MagneticButton href="https://github.com/Ashu-Meena" className="p-3.5 rounded-full border-2 border-[color:var(--border)] bg-[color:var(--background)] hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)] hover:border-transparent transition-all shadow-sm">
               <GithubIcon className="w-5 h-5" />
             </MagneticButton>
           <a 

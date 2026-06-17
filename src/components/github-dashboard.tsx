@@ -14,11 +14,11 @@ export function GithubDashboard() {
   React.useEffect(() => {
     async function fetchGitData() {
       try {
-        const res = await fetch("https://api.github.com/users/ashu-meena2420");
+        const res = await fetch("https://api.github.com/users/Ashu-Meena");
         const json = await res.json();
         
         // Fetch repos for language stats
-        const reposRes = await fetch("https://api.github.com/users/ashu-meena2420/repos?per_page=100");
+        const reposRes = await fetch("https://api.github.com/users/Ashu-Meena/repos?per_page=100");
         const repos = await reposRes.json();
         
         let stars = 0;
@@ -70,7 +70,7 @@ export function GithubDashboard() {
           <div className="flex justify-between items-start mb-6 relative z-10">
             <div className="flex items-center gap-3">
               <GithubIcon className="w-6 h-6 text-[color:var(--foreground)]" />
-              <h3 className="text-xl font-bold">ashu-meena2420</h3>
+              <h3 className="text-xl font-bold">Ashu-Meena</h3>
             </div>
             {data?.user?.avatar_url && (
               <img src={data.user.avatar_url} alt="GitHub Avatar" className="w-12 h-12 rounded-full border-2 border-[color:var(--border)]" />

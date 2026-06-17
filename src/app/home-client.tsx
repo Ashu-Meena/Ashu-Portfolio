@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Terminal, Database, Cloud, Code, Smartphone, Bot } from "lucide-react";
 import { Navbar } from "@/components/navbar";
@@ -108,11 +109,12 @@ export default function HomeClient({ initialData }: { initialData: PortfolioData
 
           <div className="z-10 flex flex-col items-start text-left max-w-4xl w-full">
             <div className="flex items-center gap-6 mb-8">
-              <div className="w-24 h-24 sm:w-28 sm:h-28 overflow-hidden border-2 border-[color:var(--accent)] bg-[color:var(--background)] shadow-[0_0_15px_rgba(0,240,255,0.4)]" style={{ clipPath: "polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)" }}>
-                <img 
+              <div className="relative w-24 h-24 sm:w-28 sm:h-28 overflow-hidden border-2 border-[color:var(--accent)] bg-[color:var(--background)] shadow-[0_0_15px_rgba(0,240,255,0.4)]" style={{ clipPath: "polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)" }}>
+                <Image 
                   src={initialData.profile.avatarUrl}
                   alt={initialData.profile.name}
-                  className="w-full h-full object-cover p-1 filter contrast-125 saturate-150" 
+                  fill
+                  className="object-cover p-1 filter contrast-125 saturate-150" 
                 />
               </div>
               <div>

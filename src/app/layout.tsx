@@ -46,6 +46,7 @@ export const metadata: Metadata = {
 import { Analytics } from "@vercel/analytics/react";
 import { SoundEngine } from "@/components/sound-engine";
 import { HackingGame } from "@/components/hacking-game";
+import { CommandMenu } from "@/components/command-menu";
 
 export default async function RootLayout({
   children,
@@ -71,6 +72,7 @@ export default async function RootLayout({
         >
           <GlobalThemeProvider theme={data.theme}>
             {children}
+            <CommandMenu />
             <Analytics />
           </GlobalThemeProvider>
         </ThemeProvider>

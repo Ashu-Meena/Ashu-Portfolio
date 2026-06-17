@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export async function updatePortfolioData(newData: PortfolioData, password?: string) {
-  if (password !== "admin123") {
+  if (password !== "20112004") {
     return { success: false, error: "Unauthorized. Incorrect password." };
   }
 
@@ -22,7 +22,7 @@ export async function updatePortfolioData(newData: PortfolioData, password?: str
 }
 
 export async function uploadResume(formData: FormData, password?: string) {
-  if (password !== "admin123") {
+  if (password !== "20112004") {
     return { success: false, error: "Unauthorized. Incorrect password." };
   }
 

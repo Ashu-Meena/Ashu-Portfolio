@@ -15,7 +15,7 @@ export function AdminDashboard({ initialData }: { initialData: PortfolioData }) 
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    if (password === "admin123") {
+    if (password === "20112004") {
       setIsAuthorized(true);
     } else {
       alert("INCORRECT PASSWORD.");

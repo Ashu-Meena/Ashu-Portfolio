@@ -130,6 +130,7 @@ function MatrixRain() {
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
+        {/* @ts-expect-error - React Three Fiber types missing args for bufferAttribute */}
         <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
       </bufferGeometry>
       <pointsMaterial size={0.1} color="var(--primary)" transparent opacity={0.8} />
@@ -159,6 +160,7 @@ function Particles() {
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
+        {/* @ts-expect-error - React Three Fiber types missing args for bufferAttribute */}
         <bufferAttribute
           attach="attributes-position"
           count={positions.length / 3}

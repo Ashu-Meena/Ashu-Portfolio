@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Terminal, Database, Cloud, Code, Smartphone, Bot } from "lucide-react";
+import { Terminal, Database, Cloud, Code, Smartphone, Bot, ArrowRight, Github } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { JourneyMap } from "@/components/journey-map";
 import { SkillsGalaxy } from "@/components/skills-galaxy";
@@ -17,6 +17,7 @@ import { MouseGlow } from "@/components/mouse-glow";
 import { Typewriter } from "@/components/typewriter";
 import { CustomCursor } from "@/components/custom-cursor";
 import { Hero3D } from "@/components/hero-3d";
+import { MagneticButton } from "@/components/magnetic-button";
 import { PortfolioData } from "@/lib/data";
 
 // Scroll reveal wrapper component
@@ -143,7 +144,7 @@ export default function HomeClient({ initialData }: { initialData: PortfolioData
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg text-[color:var(--muted-foreground)] leading-relaxed max-w-2xl mb-12 border-l-2 border-[color:var(--accent)] pl-4 font-mono text-sm"
+              className="text-lg text-[color:var(--muted-foreground)] leading-relaxed max-w-2xl mb-8 border-l-2 border-[color:var(--accent)] pl-4 font-mono text-sm"
             >
               {initialData.profile.terminalText.map((line, i) => (
                 <React.Fragment key={i}>
@@ -151,6 +152,24 @@ export default function HomeClient({ initialData }: { initialData: PortfolioData
                 </React.Fragment>
               ))}
             </motion.p>
+
+            <div className="flex flex-col sm:flex-row items-center gap-4 animate-fade-in-up mb-12" style={{ animationDelay: '0.8s' }}>
+                <MagneticButton>
+                  <a href="#projects" className="group relative px-8 py-4 bg-[color:var(--foreground)] text-[color:var(--background)] font-bold text-sm uppercase tracking-widest overflow-hidden">
+                    <span className="relative z-10 flex items-center gap-2">
+                      View Projects <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                    <div className="absolute inset-0 h-full w-0 bg-[color:var(--accent)] transition-all duration-300 ease-out group-hover:w-full z-0"></div>
+                  </a>
+                </MagneticButton>
+                
+                <MagneticButton>
+                  <a href="https://github.com/Ashu-Meena" target="_blank" rel="noopener noreferrer" className="group px-8 py-4 border border-[color:var(--border)] bg-[color:var(--background)]/50 backdrop-blur-sm font-bold text-sm uppercase tracking-widest flex items-center gap-2 hover:border-[color:var(--accent)] transition-colors">
+                    <Github className="w-4 h-4 text-[color:var(--muted-foreground)] group-hover:text-[color:var(--accent)] transition-colors" />
+                    GitHub Profile
+                  </a>
+                </MagneticButton>
+              </div>
 
             <motion.div
               initial={{ y: 20, opacity: 0 }}

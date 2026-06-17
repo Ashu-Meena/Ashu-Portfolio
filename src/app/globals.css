@@ -79,6 +79,25 @@
     background-size: 100% 2px, 3px 100%;
     pointer-events: none;
   }
+
+  /* Custom Neon Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+    border-left: 1px solid var(--border);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+    box-shadow: 0 0 10px var(--accent);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--magenta);
+    box-shadow: 0 0 15px var(--magenta);
+  }
 }
 
 /* Base glass card (deprecated for most, kept for fallback) */

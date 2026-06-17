@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-
-import { GlobalThemeProvider } from "@/components/theme-provider";
+import { CommandMenu } from "@/components/command-menu";
+import { BootSequence } from "@/components/boot-sequence";
+import { Footer } from "@/components/footer";
+import { Analytics } from "@vercel/analytics/react";
 import { getPortfolioData } from "@/lib/data";
+import { SoundEngine } from "@/components/sound-engine";
+import { HackingGame } from "@/components/hacking-game";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,11 +47,6 @@ export const metadata: Metadata = {
   },
 };
 
-import { Analytics } from "@vercel/analytics/react";
-import { SoundEngine } from "@/components/sound-engine";
-import { HackingGame } from "@/components/hacking-game";
-import { CommandMenu } from "@/components/command-menu";
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -63,7 +62,6 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <SoundEngine />
-        <HackingGame />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -71,8 +69,11 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <GlobalThemeProvider theme={data.theme}>
-            {children}
-            <CommandMenu />
+            <BootSequence>
+              {children}
+              <CommandMenu />
+              <Footer />
+            </BootSequence>
             <Analytics />
           </GlobalThemeProvider>
         </ThemeProvider>

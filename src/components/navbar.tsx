@@ -5,6 +5,7 @@ import { Moon, Sun, Briefcase, Code2, MessageSquare, PenTool } from "lucide-reac
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { MagneticButton } from "./magnetic-button";
 
 export function Navbar() {
   const { setTheme, theme } = useTheme();
@@ -35,47 +36,55 @@ export function Navbar() {
         <div className="h-4 w-px bg-[color:var(--border)]" />
 
         <div className="flex items-center gap-2">
-          <Link 
-            href="/guestbook"
-            className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 bg-[color:var(--secondary)] text-[color:var(--accent)] hover:bg-[color:var(--accent)] hover:text-black border border-[color:var(--accent)]/50"
-          >
-            <MessageSquare className="w-3.5 h-3.5" /> Guestbook
-          </Link>
+          <MagneticButton>
+            <Link 
+              href="/guestbook"
+              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 bg-[color:var(--secondary)] text-[color:var(--accent)] hover:bg-[color:var(--accent)] hover:text-black border border-[color:var(--accent)]/50"
+            >
+              <MessageSquare className="w-3.5 h-3.5" /> Guestbook
+            </Link>
+          </MagneticButton>
           
-          <Link 
-            href="/blog"
-            className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 bg-transparent hover:bg-[color:var(--secondary)] text-[color:var(--muted-foreground)] hover:text-[color:var(--foreground)] border border-transparent"
-          >
-            <PenTool className="w-3.5 h-3.5" /> Blog
-          </Link>
+          <MagneticButton>
+            <Link 
+              href="/blog"
+              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 bg-transparent hover:bg-[color:var(--secondary)] text-[color:var(--muted-foreground)] hover:text-[color:var(--foreground)] border border-transparent"
+            >
+              <PenTool className="w-3.5 h-3.5" /> Blog
+            </Link>
+          </MagneticButton>
 
           <div className="h-4 w-px bg-[color:var(--border)] mx-1 hidden md:block" />
 
-          <button
-            onClick={toggleRecruiterMode}
-            className={cn(
-              "flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-bold transition-all duration-300",
-              isRecruiterMode 
-                ? "bg-[color:var(--foreground)] text-[color:var(--background)] shadow-sm"
-                : "bg-transparent hover:bg-[color:var(--secondary)] text-[color:var(--muted-foreground)] hover:text-[color:var(--foreground)]"
-            )}
-          >
-            {isRecruiterMode ? <Briefcase className="w-3.5 h-3.5" /> : <Code2 className="w-3.5 h-3.5" />}
-            <span className="hidden sm:inline-block">
-              {isRecruiterMode ? "Recruiter" : "Developer"}
-            </span>
-          </button>
+          <MagneticButton>
+            <button
+              onClick={toggleRecruiterMode}
+              className={cn(
+                "flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-bold transition-all duration-300",
+                isRecruiterMode 
+                  ? "bg-[color:var(--foreground)] text-[color:var(--background)] shadow-sm"
+                  : "bg-transparent hover:bg-[color:var(--secondary)] text-[color:var(--muted-foreground)] hover:text-[color:var(--foreground)]"
+              )}
+            >
+              {isRecruiterMode ? <Briefcase className="w-3.5 h-3.5" /> : <Code2 className="w-3.5 h-3.5" />}
+              <span className="hidden sm:inline-block">
+                {isRecruiterMode ? "Recruiter" : "Developer"}
+              </span>
+            </button>
+          </MagneticButton>
 
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-full hover:bg-[color:var(--secondary)] text-[color:var(--muted-foreground)] hover:text-[color:var(--foreground)] transition-colors"
-          >
-            {mounted && theme === "dark" ? (
-              <Sun className="w-4 h-4" />
-            ) : (
-              <Moon className="w-4 h-4" />
-            )}
-          </button>
+          <MagneticButton>
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-full hover:bg-[color:var(--secondary)] text-[color:var(--muted-foreground)] hover:text-[color:var(--foreground)] transition-colors"
+            >
+              {mounted && theme === "dark" ? (
+                <Sun className="w-4 h-4" />
+              ) : (
+                <Moon className="w-4 h-4" />
+              )}
+            </button>
+          </MagneticButton>
         </div>
       </nav>
     </div>

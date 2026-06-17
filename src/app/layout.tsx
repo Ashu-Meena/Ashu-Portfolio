@@ -19,8 +19,31 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ashu Meena | Developer Dashboard",
   description: "Interactive personal portfolio and professional journey of Ashu Meena, Android Developer & AI Enthusiast.",
+  openGraph: {
+    title: "Ashu Meena | Developer Dashboard",
+    description: "Interactive personal portfolio and professional journey of Ashu Meena, Android Developer & AI Enthusiast.",
+    url: "https://ashu-meena.vercel.app",
+    siteName: "Ashu Meena Portfolio",
+    images: [
+      {
+        url: "https://ashu-meena.vercel.app/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Ashu Meena Portfolio Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ashu Meena | Developer Dashboard",
+    description: "Interactive personal portfolio and professional journey of Ashu Meena, Android Developer & AI Enthusiast.",
+    images: ["https://ashu-meena.vercel.app/og-image.png"],
+  },
 };
 
+import { Analytics } from "@vercel/analytics/react";
 import { SoundEngine } from "@/components/sound-engine";
 import { HackingGame } from "@/components/hacking-game";
 
@@ -48,6 +71,7 @@ export default async function RootLayout({
         >
           <GlobalThemeProvider theme={data.theme}>
             {children}
+            <Analytics />
           </GlobalThemeProvider>
         </ThemeProvider>
       </body>

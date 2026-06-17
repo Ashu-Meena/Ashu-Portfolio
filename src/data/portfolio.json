@@ -1,0 +1,253 @@
+{
+  "stats": {
+    "projects": 5,
+    "internships": 1,
+    "certifications": 5,
+    "commits": 1240
+  },
+  "projects": [
+    {
+      "id": "proj-1",
+      "title": "Unmutemann - Social Interaction Platform",
+      "category": "Full Stack Web",
+      "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
+      "description": "Developed a web-based social platform enabling users to interact via chat and explore meaningful conversations. Implemented responsive UI using modern frontend technologies.",
+      "techStack": [
+        "React.js",
+        "Node.js",
+        "Express"
+      ],
+      "results": "Live Demo Available",
+      "link": "#",
+      "github": "https://github.com/ashu-meena2420"
+    },
+    {
+      "id": "proj-2",
+      "title": "KanoonSaathi - Legal Tech Platform",
+      "category": "AI + Web Development",
+      "image": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=800",
+      "description": "Comprehensive legal-tech platform to simplify access to legal services for individuals and MSMEs. Integrated virtual consultation, AI chatbot, legal info database, and document assistance.",
+      "techStack": [
+        "AI",
+        "Web Development"
+      ],
+      "results": "Focused on improving accessibility",
+      "link": "#",
+      "github": "https://github.com/ashu-meena2420"
+    },
+    {
+      "id": "proj-3",
+      "title": "Tenant Management System",
+      "category": "Full Stack Development",
+      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800",
+      "description": "Built a tenant management platform to handle rent tracking, tenant records, and property management efficiently. Designed features like rent collection tracking and admin functionalities.",
+      "techStack": [
+        "Full Stack"
+      ],
+      "results": "Simplified property management",
+      "link": "#",
+      "github": "https://github.com/ashu-meena2420"
+    },
+    {
+      "id": "proj-4",
+      "title": "PYQ Website",
+      "category": "Web Development",
+      "image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=800",
+      "description": "Developed a platform for students to access Previous Year Question papers easily. Implemented user-friendly navigation and structured data organization.",
+      "techStack": [
+        "Web Development"
+      ],
+      "results": "Group Project",
+      "link": "#",
+      "github": "https://github.com/ashu-meena2420"
+    }
+  ],
+  "skills": [
+    {
+      "title": "Programming Languages",
+      "icon": "Code",
+      "skills": [
+        "C++",
+        "Python (Basics)"
+      ]
+    },
+    {
+      "title": "Web Development",
+      "icon": "Globe",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React.js",
+        "Node.js",
+        "Express.js"
+      ]
+    },
+    {
+      "title": "AI & ML",
+      "icon": "Bot",
+      "skills": [
+        "Machine Learning",
+        "Data Analysis",
+        "Model Building"
+      ]
+    },
+    {
+      "title": "Tools & Databases",
+      "icon": "Database",
+      "skills": [
+        "Git",
+        "GitHub",
+        "IBM Watson Studio",
+        "MySQL",
+        "MongoDB"
+      ]
+    },
+    {
+      "title": "Soft Skills",
+      "icon": "Users",
+      "skills": [
+        "Problem Solving",
+        "Team Collaboration",
+        "Communication",
+        "Project Management"
+      ]
+    }
+  ],
+  "profile": {
+    "name": "Ashu Meena",
+    "tagline": "Computer Science Student || AI/ML & Web Developer",
+    "avatarUrl": "/avatar-cyberpunk.png",
+    "terminalText": [
+      "> INITIATING SYSTEM BOOT...",
+      "> ENTHUSIASTIC COMPUTER SCIENCE STUDENT DETECTED.",
+      "> LOADING AI/ML AND FULL-STACK CAPABILITIES...",
+      "> PASSIONATE ABOUT SCALABLE & IMPACTFUL TECH SOLUTIONS."
+    ]
+  },
+  "journey": [
+    {
+      "id": 1,
+      "title": "B.Tech CSE Student",
+      "desc": "Started Bachelor of Technology in Computer Science Engineering at Jaipur National University, Jaipur.",
+      "year": "2023"
+    },
+    {
+      "id": 2,
+      "title": "IBM SkillsBuild AIML Intern",
+      "desc": "Hands-on training in AI/ML, data analysis, preprocessing, and model building using Python.",
+      "year": "2024"
+    },
+    {
+      "id": 3,
+      "title": "Hackathon Winner",
+      "desc": "Participated and secured winning/recognition positions in multiple college-level hackathons.",
+      "year": "2024"
+    },
+    {
+      "id": 4,
+      "title": "IBM CSR Annual Event",
+      "desc": "Recognized as an Active Learner at IBM CSR Annual Event in New Delhi.",
+      "year": "Oct 2024"
+    }
+  ],
+  "experiences": [
+    {
+      "id": 1,
+      "company": "IBM SkillsBuild",
+      "role": "AIML Intern",
+      "date": "June 2024 - July 2024",
+      "location": "Remote",
+      "bullets": [
+        "Completed hands-on training in Artificial Intelligence and Machine Learning through IBM SkillsBuild internship.",
+        "Worked on data analysis, preprocessing, and machine learning model building using Python.",
+        "Gained practical experience with tools like IBM Watson Studio for solving real-world problems.",
+        "Applied concepts such as classification, regression, and data visualization in project-based learning.",
+        "Strengthened understanding of AI workflows, teamwork, and industry-level practices."
+      ],
+      "skills": [
+        "Python",
+        "Machine Learning",
+        "Data Analysis",
+        "IBM Watson Studio"
+      ]
+    },
+    {
+      "id": 2,
+      "company": "IBM CSR Annual Event 2024",
+      "role": "Active Learner & Participant",
+      "date": "October 2024",
+      "location": "New Delhi",
+      "bullets": [
+        "Recognized as an Active Learner at IBM CSR Annual Event organized by CSRBox.",
+        "Attended expert sessions on emerging technologies, AI, and future skill development.",
+        "Participated in panel discussion on 'Skilling for the Era of Emerging Technologies' with industry leaders."
+      ],
+      "skills": [
+        "Networking",
+        "Emerging Technologies",
+        "Communication"
+      ]
+    },
+    {
+      "id": 3,
+      "company": "College-Level Hackathons",
+      "role": "Hackathon Participant & Winner",
+      "date": "2024 - Present",
+      "location": "Jaipur",
+      "bullets": [
+        "Participated in multiple college-level hackathons, collaborating in teams to build innovative tech solutions.",
+        "Developed real-world projects under time constraints, focusing on problem-solving and rapid prototyping.",
+        "Secured winning/recognition positions in hackathons by presenting impactful and scalable project ideas.",
+        "Enhanced skills in teamwork, communication, and project execution in competitive environments."
+      ],
+      "skills": [
+        "Problem Solving",
+        "Rapid Prototyping",
+        "Teamwork",
+        "Project Execution"
+      ]
+    }
+  ],
+  "certs": [
+    {
+      "id": 1,
+      "name": "Generative AI in Action",
+      "issuer": "IBM",
+      "date": "2024"
+    },
+    {
+      "id": 2,
+      "name": "Getting Started with Data",
+      "issuer": "IBM",
+      "date": "2024"
+    },
+    {
+      "id": 3,
+      "name": "Project Management Fundamentals",
+      "issuer": "IBM",
+      "date": "2024"
+    },
+    {
+      "id": 4,
+      "name": "Artificial Intelligence Fundamentals",
+      "issuer": "IBM",
+      "date": "2024"
+    },
+    {
+      "id": 5,
+      "name": "Getting Started with Artificial Intelligence",
+      "issuer": "IBM",
+      "date": "2024"
+    }
+  ],
+  "theme": {
+    "name": "Cyberpunk",
+    "primary": "#00f0ff",
+    "secondary": "#111111",
+    "accent": "#ff003c",
+    "background": "#050505",
+    "foreground": "#e0e0e0",
+    "magenta": "#fce205"
+  }
+}

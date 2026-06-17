@@ -3,7 +3,11 @@
 import * as React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Terminal, Database, Cloud, Code, Smartphone, Bot, ArrowRight, Github } from "lucide-react";
+import { Terminal, Database, Cloud, Code, Smartphone, Bot, ArrowRight } from "lucide-react";
+
+function GithubIcon(props: any) {
+  return <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4"></path></svg>;
+}
 import { Navbar } from "@/components/navbar";
 import { JourneyMap } from "@/components/journey-map";
 import { SkillsGalaxy } from "@/components/skills-galaxy";
@@ -165,7 +169,7 @@ export default function HomeClient({ initialData }: { initialData: PortfolioData
                 
                 <MagneticButton>
                   <a href="https://github.com/Ashu-Meena" target="_blank" rel="noopener noreferrer" className="group px-8 py-4 border border-[color:var(--border)] bg-[color:var(--background)]/50 backdrop-blur-sm font-bold text-sm uppercase tracking-widest flex items-center gap-2 hover:border-[color:var(--accent)] transition-colors">
-                    <Github className="w-4 h-4 text-[color:var(--muted-foreground)] group-hover:text-[color:var(--accent)] transition-colors" />
+                    <GithubIcon className="w-4 h-4 text-[color:var(--muted-foreground)] group-hover:text-[color:var(--accent)] transition-colors" />
                     GitHub Profile
                   </a>
                 </MagneticButton>
